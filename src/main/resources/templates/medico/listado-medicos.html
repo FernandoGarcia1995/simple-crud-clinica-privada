@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{index-template}">
+
+<head>
+
+<title>DentalRenew - Gestion de clinicas dentales</title>
+
+<th:block layout:fragment="optional_css">
+	<link th:href="@{https://pro.fontawesome.com/releases/v5.10.0/css/all.css}" rel="stylesheet">	
+	<link th:href="@{https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css}" rel="stylesheet">	
+	<link th:href="@{https://pro.fontawesome.com/releases/v5.10.0/css/all.css}" rel="stylesheet">	
+	<link th:href="@{//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css}" rel="stylesheet">
+	<link th:href="@{//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css}" rel="stylesheet">	
+</th:block>
+
+</head>
+
+<body>
+	<!-- End of Topbar -->
+	<div layout:fragment="content">
+		<div class="card shadow mb-5 mt-5">
+			<div class="card-header py-3">
+				<h6 class="m-0 font-weight-bold text-primary">Listado</h6>
+			</div>
+			<div class="card-body">
+			<th:block th:fragment="medico-list-table">
+				<div class="table-responsive" id="medico-list-table">
+					<div class="row search-row">
+						<div class="col-md-12">
+							<div id="search">
+								<label>Search:<input type="search"
+									class="form-control form-control-sm" id="search-medico-list"></label>
+							</div>
+						</div>
+					</div>
+					<table class="table table-bordered" id="dataTable" width="100%"
+						role="grid" style="width: 100%;">
+						<thead>
+							<tr>
+								<th>Nombre</th>
+								<th>Apellidos</th>
+								<th>DNI</th>
+								<th>Cod postal</th>
+								<th>Ciudad</th>
+								<th>Especialidad</th>
+								<th>Salario</th>
+								<th>Acciones</th>
+							</tr>
+						</thead>
+						<tbody>
+							<th:block th:each="medico : ${medicos}">
+								<tr>
+									<td th:text="${medico.nombre}"></td>
+									<td th:text="${medico.apellidos}"></td>
+									<td th:text="${medico.dni}"></td>
+									<td th:text="${medico.CodPostal}"></td>
+									<td th:text="${medico.ciudad}"></td>
+									<td th:text="${medico.especialidad.nombre}"></td>
+									<td th:text="${medico.salario} + ' &#8364;'"></td>
+									<td class="text-center">
+										<i class="far fa-trash-alt delete-medico" th:attr="data-id=${medico.Id}"></i>
+										<a th:href="${'/medico/editar-medico?id=' + {medico.Id} }"> <i class="far fa-edit ml-3 edit-medico"> </i></a>
+									</td>
+								</tr>
+							</th:block>
+						</tbody>
+					</table>
+					<nav aria-label="Page navigation">
+						<ul class="pagination justify-content-end">
+							<li class="page-item">
+								<th:block th:if="${currentPage} == 1">
+									<a class="page-link pagination">Previous</a>
+								</th:block> 
+								
+								<th:block th:unless="${currentPage} == 1">
+									<a class="page-link"
+										th:href="${'/medico/listado-medicos?page=' + {currentPage - 1}}">Previous</a>
+								</th:block>
+							</li>
+								
+							<th:block th:if="${numberPages} == 0">
+								<li class="page-item">
+								<a class="page-link selected" th:href="${'/medico/listado-medicos?page=1'}" th:text="1">
+								</a>
+								</li>
+							</th:block> 
+							
+							<th:block th:unless="${numberPages} == 0">
+							
+								<th:block th:each="i : ${#numbers.sequence( 1, {numberPages})}">
+									<li class="page-item">
+										<a class="page-link" th:classappend="${currentPage == i}? 'selected':''"
+										th:href="${'/medico/listado-medicos?page=' + {i}}"
+										th:text="${i}">
+										</a>
+									</li>
+								</th:block>
+							
+							</th:block>
+
+							<li class="page-item">
+							<th:block
+									th:if="${currentPage == numberPages}">
+									<a class="page-link pagination">Next</a>
+							</th:block> 
+							<th:block th:unless="${currentPage == numberPages}">
+									<a class="page-link"
+										th:href="${'/medico/listado-medicos?page=' + {currentPage + 1}}">Next</a>
+							</th:block>
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</th:block>
+			</div>
+		</div>
+	</div>
+</body>
+
+<th:block layout:fragment="optional_js">
+		<script th:src="@{https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js}"></script>
+		<script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/AlertifyJS/1.13.1/alertify.min.js}"></script>
+		<script th:src="@{/js/medico/medico.js}"></script>
+</th:block>
+
+
+</html>

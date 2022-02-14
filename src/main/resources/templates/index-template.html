@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>DentalRenew - Gestion de clinicas dentales</title>
+
+<th:block th:insert="/fragments/scripts :: script_css" />
+
+<div layout:fragment="optional_css"></div>
+
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+	<!-- Main Content -->
+	<div id="content">
+		<th:block th:insert="/fragments/navbar :: navbar">
+	</div>
+	<!-- End of Topbar -->
+	<div class="container">
+		<div layout:fragment="content">
+			<p>body content</p>
+		</div>
+	</div>
+
+	<th:block th:insert="/fragments/footer :: footer" />
+	<!-- Custom scripts for all pages-->
+	<th:block th:insert="/fragments/scripts :: script_js" />
+
+	<div layout:fragment="optional_js"></div>
+
+</body>
+
+</html>

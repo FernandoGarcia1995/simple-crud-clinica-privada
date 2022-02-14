@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{index-template}">
+
+<head>
+
+<title>DentalRenew - Gestion de clinicas dentales</title>
+
+<th:block layout:fragment="optional_css">
+	<link th:href="@{https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css}" rel="stylesheet">	
+	<link th:href="@{https://pro.fontawesome.com/releases/v5.10.0/css/all.css}" rel="stylesheet">	
+	<link th:href="@{//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css}" rel="stylesheet">
+	<link th:href="@{//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css}" rel="stylesheet">	
+</th:block>
+
+</head>
+
+<body>
+	<!-- End of Topbar -->
+	<div layout:fragment="content">
+		<div class="card shadow mb-4 mt-5">
+			<div class="card-header py-3">
+				<h6 class="m-0 font-weight-bold text-primary">Listado</h6>
+			</div>
+			<div class="card-body">
+			<th:block th:fragment="cita-list-table">
+				<div class="table-responsive" id="cita-list-table">
+					<div class="row search-row">
+						<div class="col-md-12">
+							<div id="search">
+								<label>Search:
+								<input type="search" class="form-control form-control-sm" id="cita-search-list" aria-controls="dataTable"></label>
+							</div>
+						</div>
+					</div>
+					<table class="table table-bordered" id="dataTable" width="100%"
+						role="grid" style="width: 100%;">
+						<thead>
+							<tr>
+								<th>Codigo</th>
+								<th>Cliente</th>
+								<th>Fecha</th>
+								<th>Diagnostico</th>
+								<th>Medico Asignado</th>
+								<th>Precio</th>
+								<th>Acciones</th>
+							</tr>
+						</thead>
+						<tbody id="cita-list-table">
+							<th:block th:each="cita : ${citas}" th:fragment="cita-list-table">
+								<tr>
+									<td th:text="${cita.codCita}"></td>
+									<td th:text="${cita.cliente == null} ? 'Cliente borrado' : ${cita.cliente.nombre}"></td>
+									<td th:text="${#dates.format(cita.fecha, 'dd/MM/yy hh:mm')}"></td>
+									<td th:text="${cita.diagnostico.nombre}"></td>
+									<td th:text="${cita.personaAsignada.nombre}"></td>
+									<td th:text="${cita.diagnostico.precio} + ' &#8364;'"></td>
+									<td class="text-center">
+										<i class="far fa-trash-alt delete-cita" th:attr="data-id=${cita.Id}"></i>
+										<a th:href="${'/cita/editar-cita?id=' + {cita.Id} }"> <i class="far fa-edit ml-3 edit-cita"> </i></a>
+									</td>
+								</tr>
+							</th:block>
+						</tbody>
+					</table>
+					<nav aria-label="Page navigation">
+						<ul class="pagination justify-content-end">
+							<li class="page-item">
+								<th:block th:if="${currentPage} == 1">
+									<a class="page-link pagination">Previous</a>
+								</th:block> 
+								
+								<th:block th:unless="${currentPage} == 1">
+									<a class="page-link"
+										th:href="${'/cita/listado-citas?page=' + {currentPage - 1}}">Previous</a>
+								</th:block>
+							</li>
+							
+							<th:block th:if="${numberPages} == 0">
+								<li class="page-item">
+								<a class="page-link selected" th:href="${'/cita/listado-citas?page=1'}" th:text="1">
+								</a>
+								</li>
+							</th:block> 
+							
+							<th:block th:unless="${numberPages} == 0">
+							
+								<th:block th:each="i : ${#numbers.sequence( 1, {numberPages})}">
+									<li class="page-item">
+										<a class="page-link" th:classappend="${currentPage == i}? 'selected':''"
+										th:href="${'/cita/listado-citas?page=' + {i}}"
+										th:text="${i}">
+										</a>
+									</li>
+								</th:block>
+							
+							</th:block>
+							
+
+							<li class="page-item">
+							<th:block
+									th:if="${currentPage == numberPages}">
+									<a class="page-link pagination">Next</a>
+							</th:block> 
+							<th:block th:unless="${currentPage == numberPages}">
+									<a class="page-link"
+										th:href="${'/cita/listado-citas?page=' + {currentPage + 1}}">Next</a>
+							</th:block>
+							</li>
+						</ul>
+					</nav>
+				</div>
+				</th:block>
+			</div>
+		</div>
+	</div>
+</body>
+
+
+<th:block layout:fragment="optional_js">
+		<script th:src="@{https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js}"></script>
+		<script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/AlertifyJS/1.13.1/alertify.min.js}"></script>
+		<script th:src="@{/js/cita/cita.js}"></script>
+</th:block>
+
+</html>

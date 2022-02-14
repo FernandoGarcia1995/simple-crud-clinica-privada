@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{index-template}">
+
+<head>
+
+<title>DentalRenew - Gestion de clinicas dentales</title>
+
+<th:block layout:fragment="optional_css">
+	<link rel="stylesheet" th:href="@{https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css}">
+</th:block>
+
+</head>
+
+<body>
+	<!-- End of Topbar -->
+	<div layout:fragment="content">
+		<div class="card shadow mb-4 mt-5">
+			<div class="card-header py-3">
+				<h6 class="m-0 font-weight-bold text-primary">Editar</h6>
+			</div>
+			<div class="card-body">
+				<form th:action="@{/medico/editar-medico}" th:object="${medico}" method="post">
+					<h6 class="m-0 font-weight-bold text-primary">Datos personales</h6>
+					<hr>
+					<div class="form-row">
+					
+						<input id="id" type="hidden" th:field="*{id}" />
+					
+						<div class="form-group col-md-6">
+							<label for="nombre">Nombre</label> 
+							<input th:field="*{Nombre}" type="text" class="form-control"
+							th:classappend="${#fields.hasErrors('nombre')}? 'is-invalid':''"
+							aria-describedby="error" aria-invalid="true">
+							
+							<span id="error" class="invalid-feedback" th:each="error : ${#fields.errors('apellidos')}"
+								th:text="${error}"> Validation error</span>	
+						</div>
+						<div class="form-group col-md-6">
+							<label for="inputPassword4">Apellidos</label> 
+							<input th:field="*{Apellidos}" type="text" class="form-control"
+								th:classappend="${#fields.hasErrors('apellidos')}? 'is-invalid':''"
+								aria-describedby="error" aria-invalid="true">
+								
+								<span id="error" class="invalid-feedback" th:each="error : ${#fields.errors('apellidos')}"
+								th:text="${error}"> Validation error</span>	
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="form-group col-md-3">
+							<label for="dni">DNI</label>
+							<input th:field="*{dni}" type="text" class="form-control" disabled>
+							<input th:field="*{dni}" type="hidden" class="form-control">
+						</div>
+						<div class="form-group col-md-3">
+							<label for="codPostal">Codigo postal</label> 
+							<input th:field="*{CodPostal}" type="text" class="form-control cod-postal"
+								th:classappend="${#fields.hasErrors('codPostal')}? 'is-invalid':''"
+								aria-describedby="error" aria-invalid="true" data-inputmask="'mask': '99999'">
+								
+								<span id="error" class="invalid-feedback" th:each="error : ${#fields.errors('codPostal')}"
+								th:text="${error}"> Validation error</span>	
+						</div>
+						<div class="form-group col-md-6">
+							<label for="ciudad">Ciudad</label> 
+							<input th:field="*{Ciudad}" type="text"class="form-control"
+							th:classappend="${#fields.hasErrors('ciudad')}? 'is-invalid':''"
+							aria-describedby="error" aria-invalid="true">
+							
+							<span id="error" class="invalid-feedback" th:each="error : ${#fields.errors('ciudad')}"
+							th:text="${error}"> Validation error</span>	
+						</div>
+					</div>
+					<h6 class="m-0 font-weight-bold text-primary">Datos de la especialidad</h6>
+					<hr>
+					<div class="form-row">
+						<div class="form-group col-md-6">
+						<label for="especialidad">Especialidad</label> 				
+							<select id="especialidadOption" name="especialidadOption" class="form-control">
+									<option th:each="especialidad : ${especialidades}" th:value="${especialidad.id}" th:text="${especialidad.nombre}" th:selected="${especialidad.id} == *{Especialidad.id}"></option>
+							</select>
+						</div>
+						<div class="form-group col-md-6">
+							<label for="inputCity">Salario</label> 
+							<div class="input-group mb-3">
+  								<div class="input-group-prepend">
+    								<span class="input-group-text">&#8364;</span>
+  								</div>
+ 							<input th:field="*{Salario}" id="salario" name="salario" th:value="*{salario}" type="numeric" class="form-control decimal-mask" 
+							th:classappend="${#fields.hasErrors('salario')}? 'is-invalid':''"
+							aria-describedby="error" aria-invalid="true">
+							
+							<span id="error" class="invalid-feedback" th:each="error : ${#fields.errors('salario')}"
+							th:text="${error}"> Validation error</span>	
+							</div>
+						</div>
+					</div>
+					<button type="submit" class="btn btn-primary">Editar</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+
+<th:block layout:fragment="optional_js">
+	<script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/AlertifyJS/1.13.1/alertify.min.js}"></script>
+	<script th:src="@{https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js}"></script>
+	<script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.7/jquery.inputmask.min.js}"></script>
+	<script th:src="@{/js/medico/medico.js}"></script>
+	<div th:if="${param.success}">
+
+		<script>
+			const notyf = new Notyf({
+				duration : 2000,
+				position : {
+					x : 'center',
+					y : 'top',
+				}
+			});
+
+			notyf.success('El medico fue editado correctamente en la BBDD');
+		</script>
+	</div>
+</th:block>
+
+</html>

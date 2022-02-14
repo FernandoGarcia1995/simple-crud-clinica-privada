@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{index-template}">
+
+<head>
+
+<title>DentalRenew - Gestion de clinicas dentales</title>
+
+<th:block layout:fragment="optional_css">
+	<link th:href="@{https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.css}"
+		rel="stylesheet">
+</th:block>
+
+
+</head>
+
+<body>
+	<!-- End of Topbar -->
+	<div layout:fragment="content">
+		<div class="card shadow mb-5 mt-5">
+			<div class="card-header py-3">
+				<h6 class="m-0 font-weight-bold text-primary">Calendario CITAS</h6>
+			</div>
+			<div class="card-body">
+				<div id='calendar'></div>
+			</div>
+		</div>
+	</div>
+</body>
+
+<th:block layout:fragment="optional_js">	
+	<script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js}"></script>
+	<script th:src="@{https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.js}"></script>
+	<script th:src="@{https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales/es.js}"></script>
+	<script th:src="@{/js/calendar.js}"></script>
+</th:block>
+
+</html>

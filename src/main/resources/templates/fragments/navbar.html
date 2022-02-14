@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<html>
+<th:block th:fragment="navbar">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+                    <a class="navbar-brand" href="#">DentalRenew</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarCollapse">
+                      <ul class="navbar-nav mr-auto">
+                        <li class="nav-item dropdown active">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                             Clientes
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                              <a class="dropdown-item" th:href="@{/cliente/listado-clientes?page=1}">Listado</a>
+                              <a class="dropdown-item" th:href="@{/cliente/alta-cliente}">Alta Cliente</a>
+                              <a class="dropdown-item" th:href="@{/diagnostico/alta-diagnostico}">Añadir diagnostico</a>
+                            </div>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                             Citas
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                              <a class="dropdown-item" th:href="@{/cita/listado-citas?page=1}">Listado</a>
+                              <a class="dropdown-item" th:href="@{/cita/alta-cita}">Alta cita</a>
+                               <a class="dropdown-item" th:href="@{/cita/calendario}">Calendario</a>
+                            </div>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                             Medicos
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                              <a class="dropdown-item" th:href="@{/medico/listado-medicos?page=1}">Listado</a>
+                              <a class="dropdown-item" th:href="@{/medico/alta-medico}">Alta medico</a>
+                              <a class="dropdown-item" th:href="@{/especialidad/alta-especialidad}">Añadir especialidad</a>
+                            </div>
+                        </li>
+
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                             Facturacion
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                              <a class="dropdown-item" th:href="@{/facturacion/presupuesto}">Presupuesto</a>
+                            </div>
+                        </li>
+                      </ul>
+                      
+                      <form>
+                      		<a class="logout" th:href="@{/logout}">Log out</a>
+                    </form>
+                    </div>
+                </nav>
+</th:block>
+</html>

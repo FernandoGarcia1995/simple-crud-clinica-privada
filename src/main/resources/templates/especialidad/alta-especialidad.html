@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{index-template}">
+
+<head>
+
+<title>DentalRenew - Gestion de clinicas dentales</title>
+
+<th:block layout:fragment="optional_css">
+	<link rel="stylesheet" th:href="@{https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css}">
+</th:block>
+
+</head>
+
+<body>
+	<!-- End of Topbar -->
+	<div layout:fragment="content">
+		<div class="card shadow mb-4 mt-5">
+			<div class="card-header py-3">
+				<h6 class="m-0 font-weight-bold text-primary">Alta</h6>
+			</div>
+			<div class="card-body">
+				<form th:action="@{/especialidad/alta-especialidad}" th:object="${especialidad}" method="post">
+				
+					<h6 class="m-0 font-weight-bold text-primary">Datos de la especialidad</h6>
+					<hr>
+					<div class="form-row">
+						<div class="form-group col-md-6">
+							<label for="codEspecialidad">Codigo de la especialidad</label> 
+							<input th:field="*{CodEspecialidad}" type="text" class="form-control cod-mask"
+							th:classappend="${#fields.hasErrors('codEspecialidad')}? 'is-invalid':''"
+							aria-describedby="error" aria-invalid="true" data-inputmask="'mask': 'CR-9999' ">
+							
+							<span id="error" class="invalid-feedback" th:each="error : ${#fields.errors('codEspecialidad')}"
+							th:text="${error}"> Validation error</span>	
+						</div>
+						<div class="form-group col-md-6">
+							<label for="nombre">Nombre de la especialidad</label> 
+							<input th:field="*{Nombre}" type="text" class="form-control"
+							th:classappend="${#fields.hasErrors('nombre')}? 'is-invalid':''"
+							aria-describedby="error" aria-invalid="true">
+							
+							<span id="error" class="invalid-feedback" th:each="error : ${#fields.errors('nombre')}"
+							th:text="${error}"> Validation error</span>	
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="form-group col-md-12">
+							<label for="descripcion">Descripcion</label>
+							<textarea th:field="*{Descripcion}" class="form-control" rows="3"
+							th:classappend="${#fields.hasErrors('descripcion')}? 'is-invalid':''"
+							aria-describedby="error" aria-invalid="true"></textarea>
+						</div>
+					</div>
+					<button type="submit" class="btn btn-primary">Alta</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+
+<th:block layout:fragment="optional_js">
+	<script th:src="@{https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js}"></script>
+	<script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.7/jquery.inputmask.min.js}"></script>
+	<script th:src="@{/js/especialidad/especialidad.js}"></script>
+	<div th:if="${param.success}">
+
+		<script>
+			const notyf = new Notyf({
+				duration : 2000,
+				position : {
+					x : 'center',
+					y : 'top',
+				}
+			});
+
+			notyf.success('la especialidad fue guardado correctamente en la BBDD');
+		</script>
+	</div>
+</th:block>
+
+</html>

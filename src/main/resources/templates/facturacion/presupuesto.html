@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{index-template}">
+
+<head>
+
+<title>DentalRenew - Gestion de clinicas dentales</title>
+
+</head>
+
+<body>
+	<!-- End of Topbar -->
+	<div layout:fragment="content">
+		<div class="row">
+
+			<div class="col-md-12">
+				<div class="card shadow mb-4 mt-5">
+					<div class="card-header py-3">
+						<h6 class="m-0 font-weight-bold text-primary">Generales</h6>
+					</div>
+					<div class="card-body">
+						<div class="row p-3">
+							<div class="col-md-6">
+								<span>Gastos Totales:</span> <span>213123213€</span>
+							</div>
+							<div class="col-md-6">
+								<span>Gastos Mensuales:</span> <span>6000€ por mes</span>
+							</div>
+						</div>
+						<hr>
+						<div class="row p-3">
+							<div class="col-md-6">
+								<span>Ingresos totales:</span> <span>213123213€</span>
+							</div>
+
+
+							<div class="col-md-6">
+								<span>Ingresos Mensuales:</span> <span>213123213€</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card shadow mb-4 mt-5">
+					<div class="card-header py-3">
+						<h6 class="m-0 font-weight-bold text-primary">Gastos y
+							ingresos</h6>
+					</div>
+					<div class="card-body">
+						<div class="row">
+							<canvas id="ingresos"></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card shadow mb-5 mt-5">
+					<div class="card-header py-3">
+						<h6 class="m-0 font-weight-bold text-primary">Numero de citas por
+							Medico</h6>
+					</div>
+					<div class="card-body">
+						<div class="row">
+							<canvas id="n_facturas"></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+<th:block layout:fragment="optional_js">
+	<script th:src="@{https://cdn.jsdelivr.net/npm/chart.js}"></script>
+	<script th:src="@{/js/chart.js}"></script>
+</th:block>
+
+</html>

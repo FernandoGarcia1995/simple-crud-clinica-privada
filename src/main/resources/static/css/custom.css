@@ -1,0 +1,35 @@
+body {
+	background-color: aliceblue;
+}
+
+.footer {
+	bottom: 0;
+	width: 100%;
+	height: 60px;
+}
+
+.search-row {
+	max-width: 200px;
+}
+
+.selected {
+	background-color: #dee2e6;
+}
+
+i {
+	cursor: pointer
+}
+
+a, a:link {
+	color: #858796;
+}
+
+.pagination {
+	color: #4e73df;
+	cursor: pointer;
+}
+
+.logout:hover {
+	color: rgba(255, 255, 255, 0.5);
+	text-decoration: none;
+}
